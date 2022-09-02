@@ -5,37 +5,54 @@ const refs = {
 	minutes: document.querySelector('[data-minutes]'),
 	seconds: document.querySelector('[data-seconds]'),
 	start: document.querySelector('[data-start]'),
+	tooltip: document.querySelector('.tooltip')
 }
-const DATE = new Date();
-
-// console.log(DATE);
-console.log(new Date(refs.date.value));
 
 let timeId = null;
 
 function timer() {
-	const DATE = new Date();
-	const timeBack = new Date(refs.date.value) - DATE;
-	console.log(timeBack);
+	const timeBack = new Date(refs.date.value) - new Date();
 
-	refs.days.textContent = Math.floor(timeBack / (1000 * 60 * 60 * 24) % 30)
-	refs.hours.textContent = Math.floor((timeBack / (1000 * 60 * 60)) % 24)
-	refs.minutes.textContent = Math.floor((timeBack / (1000 * 60)) % 60)
-	refs.seconds.textContent = Math.floor((timeBack / 1000) % 60)
+	console.log(timeBack);
+	refs.days.textContent = pad(Math.floor(timeBack / (1000 * 60 * 60 * 24) % 30))
+	refs.hours.textContent = pad(Math.floor((timeBack / (1000 * 60 * 60)) % 24))
+	refs.minutes.textContent = pad(Math.floor((timeBack / (1000 * 60)) % 60))
+	refs.seconds.textContent = pad(Math.floor((timeBack / 1000) % 60))
 }
 
-// refs.start.addEventListener('click', () => {
-// 	timeId = setInterval(timer, 1000);
-// })
-timeId = setInterval(timer, 1000);
+refs.date.addEventListener("change", () => {
+	if (new Date(refs.date.value) < new Date || refs.date.value == "") {
+		refs.start.setAttribute("disabled", true);
+		refs.days.textContent = "00"
+		refs.hours.textContent = "00"
+		refs.minutes.textContent = "00"
+		refs.seconds.textContent = "00"
+		refs.tooltip.classList.remove('hidden')
+	}
+	if (refs.date.value == "") {
+		refs.tooltip.classList.add('hidden')
+	}
+	if (new Date(refs.date.value) > new Date) {
+		refs.start.removeAttribute("disabled")
+	}
+	clearInterval(timeId);
+})
+
+refs.start.addEventListener('click', () => {
+	if (new Date(refs.date.value) < new Date || refs.date.value == "") {
+		refs.start.setAttribute("disabled", true);
+		return
+	}
+	refs.start.setAttribute("disabled", true);
+	refs.tooltip.classList.add('hidden')
+	timeId = setInterval(timer, 1000);
+});
 
 
-// const years = Math.floor(t / (1000 * 60 * 60 * 24 * 30 * 12));
-// const months = Math.floor(t / (1000 * 60 * 60 * 24 * 30) % 12);
-// const days = Math.floor(timeBack / (1000 * 60 * 60 * 24) % 30);
-// const hours = Math.floor((timeBack / (1000 * 60 * 60)) % 24);
-// const minutes = Math.floor((timeBack / (1000 * 60)) % 60);
-// const seconds = Math.floor((timeBack / 1000) % 60);
+function pad(value) {
+	return String(value).padStart(2, '0');
+}
+
 
 
 

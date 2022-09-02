@@ -1,18 +1,82 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #fafafa;
-  color: #212121;
-  line-height: 1.5;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: #fafafa;
+	color: #212121;
+	line-height: 1.5;
 }
 
 img {
-  display: block;
-  max-width: 100%;
+	display: block;
+	max-width: 100%;
+}
+
+.container {
+	position: relative;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	max-width: 900px;
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.timer {
+	display: flex;
+	justify-content: center;
+	gap: 50px;
+	margin-top: 30px;
+}
+
+.date-form {
+	width: 150px;
+	padding: 5px;
+	border: 2px solid darkslategray;
+	border-radius: 3px;
+	font-size: 15px;
+	text-transform: uppercase;
+	font-family: inherit;
+}
+
+.start-btn {
+	padding: 5px;
+	background-color: transparent;
+	border: 2px solid darkslategray;
+	border-radius: 3px;
+	font-size: 15px;
+	text-transform: uppercase;
+	font-family: inherit;
+}
+
+.start-btn:disabled {
+	background-color: lightgray;
+}
+
+.value {
+	font-size: 30px;
+}
+
+.label {
+	display: block;
+	font-size: 15px;
+}
+
+.tooltip {
+	font-size: 15px;
+	color: red;
+	border-radius: 3px;
+	display: inline-block;
+	position: absolute;
+	top: -25%;
+	right: 50%;
+	transform: translate(50%);
+}
+
+.hidden {
+	opacity: 0;
 }
