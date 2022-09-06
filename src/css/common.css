@@ -67,14 +67,15 @@ img {
 }
 
 .tooltip {
-	font-size: 15px;
-	color: red;
-	border-radius: 3px;
-	display: inline-block;
 	position: absolute;
 	top: -25%;
 	right: 50%;
 	transform: translate(50%);
+
+	display: inline-block;
+	font-size: 15px;
+	color: red;
+	border-radius: 3px;
 }
 
 .hidden {

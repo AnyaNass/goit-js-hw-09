@@ -50,10 +50,12 @@ function convertMs(ms) {
 refs.date.addEventListener("change", () => {
 	if (new Date(refs.date.value) < new Date || refs.date.value == "") {
 		refs.start.setAttribute("disabled", true);
+
 		refs.days.textContent = "00"
 		refs.hours.textContent = "00"
 		refs.minutes.textContent = "00"
 		refs.seconds.textContent = "00"
+
 		refs.tooltip.classList.remove('hidden')
 	}
 
