@@ -7,13 +7,11 @@ const refs = {
 refs.form.addEventListener('submit', (e) => {
 	e.preventDefault();
 
-	const delay = Number(e.target.elements.delay.value)
-	const step = Number(e.target.elements.step.value)
-	const amount = Number(e.target.elements.amount.value)
+	const { delay, step, amount } = e.target.elements;
 
-	let nextSteps = delay;
+	let nextSteps = Number(delay.value);
 
-	for (let i = 1; i <= amount; i += 1) {
+	for (let i = 1; i <= Number(amount.value); i += 1) {
 
 		createPromise(i, nextSteps)
 			.then(({ position, delay }) => {
@@ -23,7 +21,7 @@ refs.form.addEventListener('submit', (e) => {
 				Notiflix.Notify.failure(`Rejected promise ${position} in ${delay}ms`)
 			});
 
-		nextSteps += step;
+		nextSteps += Number(step.value);
 	}
 })
 
