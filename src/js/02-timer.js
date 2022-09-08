@@ -18,13 +18,17 @@ const refs = {
 	minutes: document.querySelector('[data-minutes]'),
 	seconds: document.querySelector('[data-seconds]'),
 	start: document.querySelector('[data-start]'),
-	tooltip: document.querySelector('.tooltip')
+	tooltip: document.querySelector('.tooltip'),
 }
 
 let timeId = null;
 
 function timer() {
 	const timeBack = new Date(refs.date.value) - new Date();
+
+	if (timeBack < 1000) {
+		clearInterval(timeId)
+	}
 
 	refs.days.textContent = addLeadingZero(convertMs(timeBack).days);
 	refs.hours.textContent = addLeadingZero(convertMs(timeBack).hours);

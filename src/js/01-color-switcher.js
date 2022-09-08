@@ -11,6 +11,7 @@ refs.stop.addEventListener("click", onClickStopChangeBgd);
 
 function onClickChangeBgd() {
 	refs.start.setAttribute("disabled", true)
+	refs.stop.removeAttribute("disabled");
 	timeId = setInterval(() => {
 		refs.body.style.backgroundColor = getRandomHexColor();
 	}, 1000)
@@ -21,6 +22,7 @@ function getRandomHexColor() {
 }
 
 function onClickStopChangeBgd() {
+	refs.stop.setAttribute("disabled", true)
 	clearInterval(timeId);
 	refs.start.removeAttribute("disabled");
 }
