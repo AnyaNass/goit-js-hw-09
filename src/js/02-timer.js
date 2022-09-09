@@ -13,12 +13,13 @@ flatpickr("#datetime-picker", {
 
 const refs = {
 	date: document.querySelector('#datetime-picker'),
-	days: document.querySelector('[data-days]'),
-	hours: document.querySelector('[data-hours]'),
-	minutes: document.querySelector('[data-minutes]'),
-	seconds: document.querySelector('[data-seconds]'),
+	// days: document.querySelector('[data-days]'),
+	// hours: document.querySelector('[data-hours]'),
+	// minutes: document.querySelector('[data-minutes]'),
+	// seconds: document.querySelector('[data-seconds]'),
 	start: document.querySelector('[data-start]'),
 	tooltip: document.querySelector('.tooltip'),
+	values: document.querySelectorAll('.value')
 }
 
 let timeId = null;
@@ -30,10 +31,17 @@ function timer() {
 		clearInterval(timeId)
 	}
 
-	refs.days.textContent = addLeadingZero(convertMs(timeBack).days);
-	refs.hours.textContent = addLeadingZero(convertMs(timeBack).hours);
-	refs.minutes.textContent = addLeadingZero(convertMs(timeBack).minutes);
-	refs.seconds.textContent = addLeadingZero(convertMs(timeBack).seconds);
+	const convertedTimeArr = Object.values(convertMs(timeBack));
+
+	for (let i = 0; i < convertedTimeArr.length; i += 1) {
+		refs.values[i].textContent = addLeadingZero(convertedTimeArr[i]);
+	}
+
+
+	// refs.days.textContent = addLeadingZero(convertMs(timeBack).days);
+	// refs.hours.textContent = addLeadingZero(convertMs(timeBack).hours);
+	// refs.minutes.textContent = addLeadingZero(convertMs(timeBack).minutes);
+	// refs.seconds.textContent = addLeadingZero(convertMs(timeBack).seconds);
 }
 
 function convertMs(ms) {
@@ -55,10 +63,11 @@ refs.date.addEventListener("change", () => {
 	if (new Date(refs.date.value) < new Date || refs.date.value == "") {
 		refs.start.setAttribute("disabled", true);
 
-		refs.days.textContent = "00"
-		refs.hours.textContent = "00"
-		refs.minutes.textContent = "00"
-		refs.seconds.textContent = "00"
+		refs.values.textContent = "00"
+		// refs.days.textContent = "00"
+		// refs.hours.textContent = "00"
+		// refs.minutes.textContent = "00"
+		// refs.seconds.textContent = "00"
 
 		refs.tooltip.classList.remove('hidden')
 	}
